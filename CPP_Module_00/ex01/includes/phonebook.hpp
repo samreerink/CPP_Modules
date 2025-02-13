@@ -1,7 +1,4 @@
 #include "contact.hpp"
-#include <iostream>
-#include <iomanip>
-#include <string>
 
 class PhoneBook {
 	private:
