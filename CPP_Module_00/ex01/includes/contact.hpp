@@ -7,4 +7,5 @@ class Contact {
 		std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
 	public:
 		void setContactInfo();
+		void displayFull();
 };

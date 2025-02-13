@@ -15,3 +15,11 @@ void Contact::setContactInfo() {
 			std::cout << "Darkest secret: ";
 			std::getline(std::cin, darkestSecret);
 }
+
+void Contact::displayFull() {
+	std::cout << "First name: " << firstName << std::endl;
+	std::cout << "Last name: " << lastName << std::endl;
+	std::cout << "Nickname: " << nickname << std::endl;
+	std::cout << "Phone number: " << phoneNumber << std::endl;
+	std::cout << "Darkest secret: " << darkestSecret << std::endl;
+}

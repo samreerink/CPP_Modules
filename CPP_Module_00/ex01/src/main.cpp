@@ -3,6 +3,6 @@
 int main() {
 	PhoneBook myPhone;
 
-	myPhone.addContact();
+	myPhone.searchContacts();
 	return 0;
 }

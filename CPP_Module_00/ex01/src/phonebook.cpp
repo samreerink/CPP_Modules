@@ -9,3 +9,10 @@ void PhoneBook::addContact() {
 	contacts[count % 8].setContactInfo();
 	count++;
 }
+
+void PhoneBook::searchContacts() {
+	std::cout << "Index     " << " | "
+			  << "First name" << " | "
+			  << "Last name " << " | "
+			  << "Nickname  " << std::endl;
+}
