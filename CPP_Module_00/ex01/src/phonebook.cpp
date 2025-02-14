@@ -1,6 +1,5 @@
 #include "../includes/phonebook.hpp"
 #include <iostream>
-#include <iomanip>
 #include <string>
 
 PhoneBook::PhoneBook() : count(0) {}
@@ -16,15 +15,25 @@ void PhoneBook::searchContacts() {
 			  << "Last name " << " | "
 			  << "Nickname  \n"
 			  << "-------------------------------------------------" << std::endl;
+	if (count == 0) {
+		std::cout << "Phonebook contains no contacts" << std::endl;
+		return ;
+	}
 	for (int i = 0; i < std::min(count, 8); i++) {
 		contacts[i].displayShort(i);
 	}
+	std::string input;
 	int index;
 	std::cout << "Enter Index: ";
-	std::cin >> index;
-	if (index >= 0 && index < std::min(count, 8))
-		contacts[index].displayFull();
+	std::getline(std::cin, input);
+	if (input.length() == 1 && std::isdigit(input[0])) {
+		index = std::stoi(input);
+		if (index >= 0 && index < std::min(count, 8)) {
+			contacts[index].displayFull();
+		}
+		else
+			std::cout << "Index is invalid" << std::endl;
+	}
 	else
-		std::cout << "Index is invalid";
-	std::cout << std::endl;
+		std::cout << "Index is invalid" << std::endl;
 }

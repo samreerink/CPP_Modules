@@ -24,10 +24,10 @@ void Contact::displayShort(int i) {
 }
 
 void Contact::displayFull() {
-	std::cout << "First name: " << firstName << std::endl;
-	std::cout << "Last name: " << lastName << std::endl;
-	std::cout << "Nickname: " << nickname << std::endl;
-	std::cout << "Phone number: " << phoneNumber << std::endl;
+	std::cout << "First name: " << firstName + "\n";
+	std::cout << "Last name: " << lastName + "\n";
+	std::cout << "Nickname: " << nickname + "\n";
+	std::cout << "Phone number: " << phoneNumber + "\n";
 	std::cout << "Darkest secret: " << darkestSecret << std::endl;
 }
 
