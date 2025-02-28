@@ -1,4 +1,4 @@
-#include "../includes/Weapon.hpp"
+#include "../includes/HumanA.hpp"
 
 class HumanB {
 	private:
