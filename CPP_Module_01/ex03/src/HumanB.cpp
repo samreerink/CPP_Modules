@@ -11,5 +11,5 @@ void HumanB::attack() const {
 	if (weapon)
 		std::cout << name << " attacks with their " << weapon->getType() << '\n';
 	else
-		std::cout << name << " has no weapon to attack with!\n";
+		std::cout << name << " has no weapon to attack with\n";
 }

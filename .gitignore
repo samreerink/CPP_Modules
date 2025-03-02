@@ -4,5 +4,7 @@ phonebook
 zombie
 brain
 violence
+replace
 obj
 *.o
+.replace
