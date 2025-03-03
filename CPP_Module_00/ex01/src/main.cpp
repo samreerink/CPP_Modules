@@ -5,18 +5,22 @@ int main() {
 	PhoneBook	myPhone;
 	std::string	input;
 
-	while (1)
+	std::cout << "Enter a command (ADD, SEARCH or EXIT): ";
+	while (std::getline(std::cin, input))
 	{
-		std::cout << "Enter a command (ADD, SEARCH or EXIT): ";
-		std::getline(std::cin, input);
 		if (input == "ADD")
 			myPhone.addContact();
 		else if (input == "SEARCH")
 			myPhone.searchContacts();
 		else if (input == "EXIT")
-			break ;
+			break;
 		else
 			std::cout << "Command is invalid" << std::endl;
+		std::cout << "Enter a command (ADD, SEARCH or EXIT): ";
+	}
+	if (std::cin.eof()) {
+		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
+		exit(1);
 	}
 	return 0;
 }

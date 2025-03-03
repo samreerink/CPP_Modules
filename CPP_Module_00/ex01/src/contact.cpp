@@ -4,16 +4,11 @@
 #include <string>
 
 void Contact::setContactInfo() {
-			std::cout << "First name: ";
-			std::getline(std::cin, firstName);
-			std::cout << "Last name: ";
-			std::getline(std::cin, lastName);
-			std::cout << "Nickname: ";
-			std::getline(std::cin, nickname);
-			std::cout << "Phone number: ";
-			std::getline(std::cin, phoneNumber);
-			std::cout << "Darkest secret: ";
-			std::getline(std::cin, darkestSecret);
+			firstName = checkInput("First name: ");
+			lastName = checkInput("Last name: ");
+			nickname = checkInput("Nickname: ");
+			phoneNumber = checkInput("Phone number: ");
+			darkestSecret = checkInput("Darkest secret: ");
 }
 
 void Contact::displayShort(int i) {
@@ -24,11 +19,39 @@ void Contact::displayShort(int i) {
 }
 
 void Contact::displayFull() {
-	std::cout << "First name: " << firstName + "\n";
-	std::cout << "Last name: " << lastName + "\n";
-	std::cout << "Nickname: " << nickname + "\n";
-	std::cout << "Phone number: " << phoneNumber + "\n";
+	std::cout << "First name: " << firstName + '\n';
+	std::cout << "Last name: " << lastName + '\n';
+	std::cout << "Nickname: " << nickname + '\n';
+	std::cout << "Phone number: " << phoneNumber + '\n';
 	std::cout << "Darkest secret: " << darkestSecret << std::endl;
+}
+
+std::string Contact::checkInput(const std::string &prompt) {
+	std::string input;
+
+	std::cout << prompt;
+	if (!std::getline(std::cin, input)) {
+		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
+		exit(1);
+	}
+	while (input.empty() || strAllWhitespace(input)) {
+		std::cout << "Contact details cannot be empty\n";
+		std::cout << prompt;
+		if (!std::getline(std::cin, input)) {
+			std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
+			exit(1);
+		}
+	}
+	return (input);
+}
+
+bool Contact::strAllWhitespace(std::string &str) {
+	for (size_t i = 0; i < str.length(); i++) {
+		if (!std::isspace(str[i])) {
+			return false;
+		}
+	}
+	return true;
 }
 
 std::string Contact::truncate(std::string str) {
