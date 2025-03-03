@@ -17,11 +17,11 @@ int main() {
 		club.setType("some other type of club");
 	}
 	HumanB sam("Sam");
-	Weapon w("Manatee");
+	Weapon w("Sword");
 	sam.attack();
 	sam.setWeapon(w);
 	sam.attack();
-	w.setType("Bazooka");
+	w.setType("Axe");
 	sam.attack();
 	return 0;
 }

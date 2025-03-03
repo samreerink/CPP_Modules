@@ -3,7 +3,7 @@
 int	main() {
 	Zombie* z = newZombie("Pointer");
 	randomChump("Sam");
-//	z->announce();
+	z->announce();
 	delete z;
 	return 0;
 }

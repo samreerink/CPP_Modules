@@ -3,6 +3,7 @@
 
 void replaceContent(std::ifstream &infile, std::ofstream &outfile, const std::string &s1, const std::string &s2) {
 	std::string line;
+
 	while (std::getline(infile, line)) {
 		size_t pos = 0;
 		while ((pos = line.find(s1, pos)) != std::string::npos) {
@@ -23,12 +24,14 @@ int main(int argc, char *argv[]) {
 		std::cerr << "./replace: <s1> contains no content" << std::endl;
 		return 1;
 	}
+
 	std::string file = argv[1];
 	std::ifstream infile(file);
 	if (!infile) {
 		std::cerr << "./replace: " << argv[1] << ": could not open file" << std::endl;
 		return 1;
 	}
+
 	std::ofstream outfile(file + ".replace");
 	if (!outfile) {
 		std::cerr << "./replace: could not create output file " << file << ".replace" << std::endl;
