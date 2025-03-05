@@ -1,4 +1,4 @@
-#include "../includes/contact.hpp"
+#include "../includes/Contact.hpp"
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -34,24 +34,41 @@ std::string Contact::checkInput(const std::string &prompt) {
 		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
 		exit(1);
 	}
-	while (input.empty() || strAllWhitespace(input)) {
-		std::cout << "Contact details cannot be empty\n";
+	int wspaceCheck = checkWhitespace(input);
+	while (input.empty() || wspaceCheck) {
+		if (wspaceCheck != 2)
+			std::cout << "Contact details cannot be empty\n";
+		else
+			std::cout << "Only one whitespace between words is allowed\n";
 		std::cout << prompt;
 		if (!std::getline(std::cin, input)) {
 			std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
 			exit(1);
 		}
+		wspaceCheck = checkWhitespace(input);
 	}
 	return (input);
 }
 
-bool Contact::strAllWhitespace(std::string &str) {
+int Contact::checkWhitespace(std::string &str) {
+	bool allWspace = true;
+	size_t consecutiveWspace = 0;
+
+	if (std::isspace(str[0]) && !std::isspace(str[1]))
+		return 2;
 	for (size_t i = 0; i < str.length(); i++) {
-		if (!std::isspace(str[i])) {
-			return false;
+		if (std::isspace(str[i])) {
+			consecutiveWspace++;
+			if (consecutiveWspace > 1)
+				return 2;
+		} else {
+			allWspace = false;
+			consecutiveWspace = 0;
 		}
 	}
-	return true;
+	if (allWspace)
+		return 1;
+	return 0;
 }
 
 std::string Contact::truncate(std::string str) {

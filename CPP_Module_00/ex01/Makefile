@@ -10,7 +10,7 @@ SRC_DIR=	src
 
 OBJ_DIR=	obj
 
-SRCS= 		$(addprefix $(SRC_DIR)/, main.cpp contact.cpp phonebook.cpp)
+SRCS= 		$(addprefix $(SRC_DIR)/, main.cpp Contact.cpp Phonebook.cpp)
 
 OBJ=		$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 

@@ -1,4 +1,4 @@
-#include "../includes/phonebook.hpp"
+#include "../includes/Phonebook.hpp"
 #include <iostream>
 
 int main() {
@@ -20,7 +20,7 @@ int main() {
 	}
 	if (std::cin.eof()) {
 		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
-		exit(1);
+		return 1;
 	}
 	return 0;
 }
