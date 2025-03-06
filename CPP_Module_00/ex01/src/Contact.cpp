@@ -28,47 +28,58 @@ void Contact::displayFull() {
 
 std::string Contact::checkInput(const std::string &prompt) {
 	std::string input;
+	bool (*f)(const std::string &str) = checkWhitespace;
 
+	if (prompt == "Phone number: ")
+		f = checkInputPhone;
 	std::cout << prompt;
 	if (!std::getline(std::cin, input)) {
 		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
 		exit(1);
 	}
-	int wspaceCheck = checkWhitespace(input);
-	while (input.empty() || wspaceCheck) {
-		if (wspaceCheck != 2)
-			std::cout << "Contact details cannot be empty\n";
-		else
-			std::cout << "Only one whitespace between words is allowed\n";
+	while (input.empty() || !f(input)) {
+		std::cout << "Contact input rules:\n";
+		if (prompt != "Phone number: ") {
+			std:: cout << "- Contact details cannot be empty\n" 
+					   << "- Only one whitespace between words is allowed" << std::endl;
+		} else 
+			std::cout << "- Phone number can only contain digits" << std::endl;
 		std::cout << prompt;
 		if (!std::getline(std::cin, input)) {
 			std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
 			exit(1);
 		}
-		wspaceCheck = checkWhitespace(input);
 	}
 	return (input);
 }
 
-int Contact::checkWhitespace(std::string &str) {
-	bool allWspace = true;
+bool Contact::checkWhitespace(const std::string &str) {
+	size_t i;
 	size_t consecutiveWspace = 0;
 
-	if (std::isspace(str[0]) && !std::isspace(str[1]))
-		return 2;
-	for (size_t i = 0; i < str.length(); i++) {
-		if (std::isspace(str[i])) {
+	if (std::isspace(str[0]))
+		return false;
+	for (i = 1; i < str.length(); i++) {
+		if (isspace(str[i])) {
 			consecutiveWspace++;
 			if (consecutiveWspace > 1)
-				return 2;
-		} else {
-			allWspace = false;
+				return false;
+		} else 
 			consecutiveWspace = 0;
-		}
 	}
-	if (allWspace)
-		return 1;
-	return 0;
+	if (std::isspace(str[i - 1]))
+		return false;
+	return true;
+}
+
+bool Contact::checkInputPhone(const std::string &str) {
+	if (str[0] != '+' && !std::isdigit(str[0]))
+		return false;
+	for (size_t i = 1; i < str.length(); i++) {
+		if (!std::isdigit(str[i]))
+			return false;
+	}
+	return true;
 }
 
 std::string Contact::truncate(std::string str) {
