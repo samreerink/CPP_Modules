@@ -28,16 +28,16 @@ void Contact::displayFull() {
 
 std::string Contact::checkInput(const std::string &prompt) {
 	std::string input;
-	bool (*f)(const std::string &str) = checkWhitespace;
+	bool (Contact::*f)(const std::string &str) = &Contact::checkWhitespace;
 
 	if (prompt == "Phone number: ")
-		f = checkInputPhone;
+		f = &Contact::checkInputPhone;
 	std::cout << prompt;
 	if (!std::getline(std::cin, input)) {
 		std::cerr << "\n./phonebook: Exit due closed input stream" << std::endl;
 		exit(1);
 	}
-	while (input.empty() || !f(input)) {
+	while (input.empty() || !(this->*f)(input)) {
 		std::cout << "Contact input rules:\n";
 		if (prompt != "Phone number: ") {
 			std:: cout << "- Contact details cannot be empty\n" 
